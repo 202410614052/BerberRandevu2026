@@ -679,3 +679,60 @@
     min-height: 48px;
   }
 }
+.adminHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.adminNotificationButton {
+  padding: 12px 20px;
+  border: 1px solid #d4af37;
+  border-radius: 8px;
+  background: #d4af37;
+  color: #111111;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.adminNotificationButton:hover {
+  background: #f1cf5a;
+}
+
+.adminNotificationButton:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.adminNotificationMessage {
+  width: min(1200px, 92%);
+  margin: 15px auto;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.adminNotificationMessage.success {
+  background: rgba(35, 160, 80, 0.15);
+  border: 1px solid #23a050;
+  color: #65d98c;
+}
+
+.adminNotificationMessage.error {
+  background: rgba(210, 45, 45, 0.15);
+  border: 1px solid #d22d2d;
+  color: #ff7777;
+}
+
+@media (max-width: 700px) {
+  .adminHeaderActions {
+    width: 100%;
+  }
+
+  .adminNotificationButton,
+  .adminLogoutButton {
+    width: 100%;
+  }
+}

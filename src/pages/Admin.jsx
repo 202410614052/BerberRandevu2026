@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import { supabase } from "../services/supabase";
+import { requestNotificationToken } from "../services/firebase";
 import "../styles/admin.css";
 
 const EMPLOYEES = ["Yaşar Gökçeev", "Çırak"];
@@ -60,6 +61,8 @@ function Admin() {
   const [isLoading, setIsLoading] = useState(false);
   const [isChanging, setIsChanging] = useState(false);
   const [clockTick, setClockTick] = useState(Date.now());
+  const [notificationStatus, setNotificationStatus] = useState("idle");
+  const [notificationMessage, setNotificationMessage] = useState("");
 
   const today = getTurkeyNow().date;
 
@@ -307,6 +310,60 @@ function Admin() {
     }
   };
 
+  const handleEnableNotifications = async () => {
+    if (notificationStatus === "loading") return;
+
+    setNotificationStatus("loading");
+    setNotificationMessage("");
+
+    try {
+      const { data: sessionData, error: sessionError } =
+        await supabase.auth.getSession();
+
+      if (sessionError) throw sessionError;
+
+      const session = sessionData?.session;
+
+      if (!session?.user) {
+        throw new Error("Bildirimleri açmak için yönetici girişi yapmalısınız.");
+      }
+
+      const token = await requestNotificationToken();
+
+      const deviceName = [
+        navigator.platform || "Bilinmeyen cihaz",
+        navigator.userAgent || "",
+      ]
+        .filter(Boolean)
+        .join(" - ")
+        .slice(0, 500);
+
+      const { error: tokenError } = await supabase
+        .from("admin_push_tokens")
+        .upsert(
+          {
+            token,
+            device_name: deviceName,
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: "token" }
+        );
+
+      if (tokenError) throw tokenError;
+
+      setNotificationStatus("enabled");
+      setNotificationMessage(
+        "Bildirimler açıldı. Yeni randevular bu cihaza gönderilecek."
+      );
+    } catch (error) {
+      console.error("Bildirimler açılamadı:", error);
+      setNotificationStatus("error");
+      setNotificationMessage(
+        error?.message || "Bildirimler açılırken bir hata oluştu."
+      );
+    }
+  };
+
   const getAppointmentByTime = (time) =>
     appointments.find((item) => normalizeTime(item.appointment_time) === time);
 
@@ -508,8 +565,42 @@ function Admin() {
             <h1>Randevu ve Saat Yönetimi</h1>
             <span>Randevular gerçek zamanlı yenilenir.</span>
           </div>
-          <button type="button" className="adminLogoutButton" onClick={handleLogout} disabled={isChanging}>Çıkış Yap</button>
+          <div className="adminHeaderActions">
+            <button
+              type="button"
+              className="adminNotificationButton"
+              onClick={handleEnableNotifications}
+              disabled={notificationStatus === "loading"}
+            >
+              {notificationStatus === "loading"
+                ? "Bildirimler Açılıyor..."
+                : notificationStatus === "enabled"
+                  ? "Bildirimler Açık"
+                  : "Bildirimleri Aç"}
+            </button>
+
+            <button
+              type="button"
+              className="adminLogoutButton"
+              onClick={handleLogout}
+              disabled={isChanging}
+            >
+              Çıkış Yap
+            </button>
+          </div>
         </section>
+
+        {notificationMessage && (
+          <div
+            className={
+              notificationStatus === "error"
+                ? "adminNotificationMessage error"
+                : "adminNotificationMessage success"
+            }
+          >
+            {notificationMessage}
+          </div>
+        )}
 
         <section className="adminDashboardGrid">
           <article className="adminStatCard"><span>Bugünkü Randevu</span><strong>{statistics.today}</strong></article>
