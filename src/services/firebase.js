@@ -27,8 +27,12 @@ export const requestNotificationToken = async () => {
 
     if (!messagingSupported) {
       throw new Error(
-        "Bu cihaz veya tarayıcı bildirim sistemini desteklemiyor."
+        "Bu cihaz veya tarayıcı Firebase bildirimlerini desteklemiyor."
       );
+    }
+
+    if (!("serviceWorker" in navigator)) {
+      throw new Error("Bu tarayıcı Service Worker desteklemiyor.");
     }
 
     if (!("Notification" in window)) {
@@ -41,10 +45,19 @@ export const requestNotificationToken = async () => {
       throw new Error("Bildirim izni verilmedi.");
     }
 
+    await navigator.serviceWorker.register(
+      "/firebase-messaging-sw.js",
+      {
+        scope: "/",
+      }
+    );
+
     const serviceWorkerRegistration =
-      await navigator.serviceWorker.register(
-        "/firebase-messaging-sw.js"
-      );
+      await navigator.serviceWorker.ready;
+
+    if (!serviceWorkerRegistration.active) {
+      throw new Error("Bildirim servisi aktif hale getirilemedi.");
+    }
 
     const messaging = getMessaging(firebaseApp);
 
@@ -54,7 +67,7 @@ export const requestNotificationToken = async () => {
     });
 
     if (!token) {
-      throw new Error("Bildirim cihaz anahtarı oluşturulamadı.");
+      throw new Error("Cihaz bildirim anahtarı oluşturulamadı.");
     }
 
     return token;
@@ -64,9 +77,7 @@ export const requestNotificationToken = async () => {
   }
 };
 
-export const listenForegroundNotifications = async (
-  callback
-) => {
+export const listenForegroundNotifications = async (callback) => {
   const messagingSupported = await isSupported();
 
   if (!messagingSupported) {
@@ -76,7 +87,7 @@ export const listenForegroundNotifications = async (
   const messaging = getMessaging(firebaseApp);
 
   return onMessage(messaging, (payload) => {
-    console.log("Yeni bildirim:", payload);
+    console.log("Ön planda bildirim alındı:", payload);
 
     if (typeof callback === "function") {
       callback(payload);
