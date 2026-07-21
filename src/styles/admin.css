@@ -1,0 +1,681 @@
+.adminLoginPage {
+  min-height: calc(100vh - 80px);
+  padding: 70px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at top, rgba(212, 175, 55, 0.08), transparent 30%),
+    linear-gradient(135deg, #080808, #121212);
+}
+
+.adminLoginCard {
+  width: 100%;
+  max-width: 520px;
+  padding: 48px;
+  background: linear-gradient(145deg, #171717, #0d0d0d);
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  border-radius: 22px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.55),
+    0 0 35px rgba(212, 175, 55, 0.08);
+}
+
+.adminSmallTitle {
+  margin-bottom: 10px;
+  color: #d4af37;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.adminLoginCard h1 {
+  margin-bottom: 14px;
+  color: #ffffff;
+  font-size: 42px;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.adminLoginDescription {
+  max-width: 400px;
+  margin: 0 auto 34px;
+  display: block;
+  color: #a5a5a5;
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.adminLoginCard form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.adminFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.adminFormGroup label {
+  color: #d4af37;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.adminFormGroup input {
+  width: 100%;
+  height: 54px;
+  padding: 0 16px;
+  background: #0b0b0b;
+  color: #ffffff;
+  border: 1px solid #3c3c3c;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.adminFormGroup input::placeholder {
+  color: #6f6f6f;
+}
+
+.adminFormGroup input:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+}
+
+.adminLoginError {
+  padding: 12px 14px;
+  background: rgba(185, 28, 28, 0.16);
+  color: #ff8c8c;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 9px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.adminLoginButton {
+  height: 56px;
+  margin-top: 4px;
+  background: linear-gradient(135deg, #f0cf67, #b78b18);
+  color: #111111;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  transition: 0.25s;
+}
+
+.adminLoginButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(212, 175, 55, 0.22);
+}
+
+.adminLoginButton:active {
+  transform: translateY(0);
+}
+
+/* Yönetici paneli */
+
+.adminPage {
+  min-height: 100vh;
+  padding: 50px 6%;
+  background: #0b0b0b;
+}
+
+.adminHeader,
+.adminEmployeeSection,
+.adminCalendarSection,
+.adminTimeSection,
+.adminAppointmentsSection {
+  max-width: 1300px;
+  margin: 0 auto 28px;
+  padding: 30px;
+  background: #151515;
+  border: 1px solid #2d2d2d;
+  border-radius: 18px;
+}
+
+.adminHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.adminHeader p,
+.adminSectionTitle p {
+  margin-bottom: 7px;
+  color: #d4af37;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.adminHeader h1 {
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 34px;
+}
+
+.adminHeader span {
+  color: #989898;
+  line-height: 1.6;
+}
+
+.adminLogoutButton {
+  padding: 13px 22px;
+  background: transparent;
+  color: #d4af37;
+  border: 1px solid #d4af37;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.adminEmployeeSection h2,
+.adminSectionTitle h2 {
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.adminEmployeeButtons {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.adminEmployeeButton {
+  padding: 14px 24px;
+  background: #0c0c0c;
+  color: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.activeEmployee {
+  background: #d4af37;
+  color: #111111;
+  border-color: #d4af37;
+}
+
+.adminCalendarDays {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(90px, 1fr));
+  gap: 12px;
+}
+
+.adminCalendarDay {
+  min-height: 115px;
+  padding: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: #0b0b0b;
+  color: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.adminCalendarDay span,
+.adminCalendarDay small {
+  color: #a3a3a3;
+}
+
+.adminCalendarDay strong {
+  font-size: 28px;
+}
+
+.adminCalendarDay em {
+  color: #d4af37;
+  font-size: 10px;
+  font-style: normal;
+}
+
+.selectedAdminDay {
+  background: #d4af37;
+  color: #111111;
+  border-color: #d4af37;
+}
+
+.selectedAdminDay span,
+.selectedAdminDay small,
+.selectedAdminDay em {
+  color: #111111;
+}
+
+.adminTimeHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.adminBulkButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.blockAllButton,
+.openAllButton {
+  padding: 12px 18px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.blockAllButton {
+  background: #050505;
+  color: #ffffff;
+  border: 1px solid #494949;
+}
+
+.openAllButton {
+  background: #d4af37;
+  color: #111111;
+  border: 1px solid #d4af37;
+}
+
+.adminStatusLegend {
+  margin: 22px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: #c5c5c5;
+}
+
+.adminStatusLegend div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.adminStatusLegend span {
+  width: 15px;
+  height: 15px;
+  display: block;
+  border-radius: 4px;
+}
+
+.adminAvailableColor {
+  background: #176b39;
+}
+
+.adminBookedColor {
+  background: #a92525;
+}
+
+.adminBlockedColor {
+  background: #050505;
+  border: 1px solid #555555;
+}
+
+.adminTimeGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.adminTimeButton {
+  min-height: 90px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 10px;
+}
+
+.adminTimeButton strong {
+  font-size: 17px;
+}
+
+.adminTimeButton span,
+.adminTimeButton small {
+  font-size: 12px;
+}
+
+.adminAvailableTime {
+  background: #123d24;
+  color: #ffffff;
+  border: 1px solid #1f7441;
+  cursor: pointer;
+}
+
+.adminBookedTime {
+  background: #7f1d1d;
+  color: #ffffff;
+  border: 1px solid #bd3535;
+}
+
+.adminBlockedTime {
+  background: #050505;
+  color: #888888;
+  border: 1px solid #393939;
+  cursor: pointer;
+}
+
+.adminLoading,
+.adminEmptyAppointments {
+  padding: 22px;
+  background: #0b0b0b;
+  color: #999999;
+  border: 1px dashed #3b3b3b;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.adminAppointmentList {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.adminAppointmentCard {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  align-items: center;
+  gap: 22px;
+  background: #0d0d0d;
+  border: 1px solid #2f2f2f;
+  border-radius: 13px;
+}
+
+.adminAppointmentTime span {
+  display: block;
+  color: #999999;
+  font-size: 12px;
+}
+
+.adminAppointmentTime strong {
+  color: #d4af37;
+  font-size: 27px;
+}
+
+.adminAppointmentInformation h3 {
+  margin-bottom: 9px;
+  color: #ffffff;
+}
+
+.adminAppointmentInformation p {
+  margin: 5px 0;
+  color: #b5b5b5;
+}
+
+.cancelAppointmentButton {
+  padding: 12px 16px;
+  background: #811c1c;
+  color: #ffffff;
+  border: 1px solid #b83737;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .adminCalendarDays,
+  .adminTimeGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .adminAppointmentCard {
+    grid-template-columns: 90px 1fr;
+  }
+
+  .cancelAppointmentButton {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 650px) {
+  .adminLoginPage {
+    padding: 40px 15px;
+  }
+
+  .adminLoginCard {
+    padding: 32px 22px;
+  }
+
+  .adminLoginCard h1 {
+    font-size: 34px;
+  }
+
+  .adminHeader,
+  .adminTimeHeader {
+    flex-direction: column;
+  }
+
+  .adminCalendarDays,
+  .adminTimeGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .adminAppointmentCard {
+    grid-template-columns: 1fr;
+  }
+}
+/* Bu kodu mevcut src/styles/admin.css dosyanızın EN ALTINA ekleyin. */
+.adminDashboardGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 22px 0;
+}
+
+.adminStatCard {
+  padding: 22px;
+  background: linear-gradient(145deg, #171717, #0b0b0b);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 14px;
+}
+
+.adminStatCard span {
+  display: block;
+  margin-bottom: 10px;
+  color: #a7a7a7;
+  font-size: 13px;
+}
+
+.adminStatCard strong {
+  color: #d4af37;
+  font-size: 34px;
+}
+
+.adminPastColor {
+  background: #555;
+  border: 1px solid #777;
+}
+
+.adminPastTime {
+  color: #999;
+  cursor: not-allowed;
+  background: repeating-linear-gradient(135deg, #282828, #282828 8px, #222 8px, #222 16px);
+  border: 1px solid #454545;
+  opacity: 0.7;
+}
+
+.adminPastTime strong {
+  text-decoration: line-through;
+}
+
+.adminAppointmentsTopbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.adminSearchInput {
+  width: min(100%, 350px);
+  padding: 13px 16px;
+  color: #fff;
+  background: #0d0d0d;
+  border: 1px solid #363636;
+  border-radius: 10px;
+  outline: none;
+}
+
+.adminSearchInput:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.adminAppointmentTabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.adminAppointmentTabs button {
+  padding: 11px 18px;
+  color: #bbb;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.adminAppointmentTabs button.active {
+  color: #111;
+  background: #d4af37;
+  border-color: #d4af37;
+  font-weight: 800;
+}
+
+.pastAppointmentCard {
+  opacity: 0.72;
+}
+
+.pastAppointmentBadge {
+  padding: 10px 15px;
+  color: #cfcfcf;
+  background: #292929;
+  border: 1px solid #444;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .adminDashboardGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .adminDashboardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .adminAppointmentsTopbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .adminSearchInput {
+    width: 100%;
+  }
+}
+@media (max-width: 900px) {
+  .adminPage,
+  .admin-page,
+  .adminDashboard,
+  .admin-dashboard,
+  .adminContainer,
+  .admin-container {
+    width: 100%;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .adminHeader,
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .adminStats,
+  .admin-stats,
+  .statsGrid,
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .employeeButtons,
+  .employee-buttons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .adminActions,
+  .admin-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .adminActions button,
+  .admin-actions button {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .appointmentsTableWrapper,
+  .appointments-table-wrapper,
+  .tableWrapper,
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    min-width: 750px;
+  }
+}
+
+@media (max-width: 520px) {
+  .adminStats,
+  .admin-stats,
+  .statsGrid,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .employeeButtons,
+  .employee-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .adminLoginBox,
+  .admin-login-box {
+    width: 92%;
+    padding: 25px 17px;
+  }
+
+  .adminLoginBox button,
+  .admin-login-box button {
+    width: 100%;
+    min-height: 48px;
+  }
+}

@@ -1,0 +1,361 @@
+.appointmentPage {
+  min-height: calc(100vh - 80px);
+  padding: 80px 5% 30px;
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(212, 175, 55, 0.11),
+      transparent 35%
+    ),
+    #0b0b0b;
+}
+
+.appointmentHeader {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.appointmentHeader > p {
+  margin-bottom: 14px;
+  color: #d4af37;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.appointmentHeader h1 {
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 48px;
+}
+
+.appointmentHeader span {
+  display: block;
+  color: #a8a8a8;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.appointmentContent {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 45px;
+  align-items: start;
+}
+
+.appointmentInfo,
+.appointmentForm {
+  padding: 42px;
+  background: #151515;
+  border: 1px solid #2d2d2d;
+  border-radius: 18px;
+}
+
+.appointmentSmallTitle,
+.formTitle p {
+  margin-bottom: 12px;
+  color: #d4af37;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.appointmentInfo h2,
+.formTitle h2 {
+  color: #ffffff;
+  font-size: 32px;
+  line-height: 1.35;
+}
+
+.appointmentInfo > p:not(.appointmentSmallTitle) {
+  margin-top: 22px;
+  color: #a7a7a7;
+  line-height: 1.8;
+}
+
+.appointmentSteps {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.appointmentSteps > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  background: #0e0e0e;
+  border: 1px solid #292929;
+  border-radius: 12px;
+}
+
+.appointmentSteps strong {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #d4af37;
+  color: #111111;
+  border-radius: 50%;
+  font-size: 17px;
+}
+
+.appointmentSteps span {
+  color: #949494;
+  line-height: 1.6;
+}
+
+.appointmentSteps b {
+  display: block;
+  margin-bottom: 4px;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.formTitle {
+  margin-bottom: 30px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.formGroup {
+  margin-bottom: 22px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 9px;
+  color: #e8e8e8;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  padding: 15px 16px;
+  background: #0d0d0d;
+  color: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 9px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: #6f6f6f;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
+}
+
+.formGroup select option {
+  background: #111111;
+  color: #ffffff;
+}
+
+.continueButton {
+  width: 100%;
+  padding: 16px;
+  background: #d4af37;
+  color: #111111;
+  border: 1px solid #d4af37;
+  border-radius: 9px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.continueButton:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 950px) {
+  .appointmentContent {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .appointmentPage {
+    padding: 60px 20px 20px;
+  }
+
+  .appointmentHeader h1 {
+    font-size: 35px;
+  }
+
+  .appointmentInfo,
+  .appointmentForm {
+    padding: 28px 20px;
+  }
+
+  .appointmentInfo h2,
+  .formTitle h2 {
+    font-size: 27px;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+.dateTimeSection {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.selectedCustomerCard {
+  padding: 25px 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+  gap: 25px;
+  background: #151515;
+  border: 1px solid #2d2d2d;
+  border-radius: 16px;
+}
+
+.selectedCustomerCard div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.selectedCustomerCard span,
+.appointmentSummary span {
+  color: #8e8e8e;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.selectedCustomerCard strong,
+.appointmentSummary strong {
+  color: #ffffff;
+  font-size: 17px;
+}
+
+.editInformationButton {
+  padding: 13px 20px;
+  background: transparent;
+  color: #d4af37;
+  border: 1px solid #d4af37;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.editInformationButton:hover {
+  background: #d4af37;
+  color: #111111;
+}
+
+.appointmentSummary {
+  margin-top: 25px;
+  padding: 28px 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+  gap: 25px;
+  background: #151515;
+  border: 1px solid #2d2d2d;
+  border-radius: 16px;
+}
+
+.appointmentSummary div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.createAppointmentButton {
+  padding: 15px 25px;
+  background: #d4af37;
+  color: #111111;
+  border: 1px solid #d4af37;
+  border-radius: 9px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.createAppointmentButton:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 750px) {
+  .selectedCustomerCard,
+  .appointmentSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .editInformationButton,
+  .createAppointmentButton {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .appointmentPage,
+  .appointment-page,
+  .appointmentContainer,
+  .appointment-container {
+    width: 100%;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .appointmentContent,
+  .appointment-content,
+  .appointmentWrapper,
+  .appointment-wrapper {
+    width: 100%;
+  }
+
+  .appointmentForm,
+  .appointment-form {
+    width: 100%;
+    padding: 20px 15px;
+  }
+
+  .formRow,
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .appointmentForm button,
+  .appointment-form button {
+    width: 100%;
+    min-height: 48px;
+  }
+}

@@ -1,0 +1,327 @@
+.timeSlotsSection {
+  width: 100%;
+  padding: 30px;
+  background: #111111;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 18px;
+}
+
+.timeSlotsHeader {
+  margin-bottom: 22px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.timeSlotsHeader > div > span {
+  color: #d4af37;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.timeSlotsHeader h2 {
+  margin: 7px 0 0;
+  color: #ffffff;
+  font-size: 27px;
+}
+
+.timeSlotsHeader p {
+  max-width: 310px;
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.timeStatusLegend {
+  margin-bottom: 24px;
+  padding: 15px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: #090909;
+  border: 1px solid #292929;
+  border-radius: 11px;
+}
+
+.timeStatusLegend div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #dddddd;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.timeStatusLegend span {
+  width: 14px;
+  height: 14px;
+  display: block;
+  border-radius: 4px;
+}
+
+.legendAvailable {
+  background: #168447;
+  border: 1px solid #4bc777;
+}
+
+.legendBooked {
+  background: #ae2929;
+  border: 1px solid #ef5050;
+}
+
+.legendBlocked {
+  background: #000000;
+  border: 1px solid #777777;
+}
+
+.legendPast {
+  background: #4b4b4b;
+  border: 1px solid #888888;
+}
+
+.legendSelected {
+  background: #d4af37;
+  border: 1px solid #f0d06a;
+}
+
+.timeSlotsGrid {
+  display: grid;
+  grid-template-columns: repeat(
+    5,
+    minmax(105px, 1fr)
+  );
+  gap: 12px;
+}
+
+.timeSlotButton {
+  min-height: 86px;
+  padding: 13px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 11px;
+  font-family: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  opacity: 1;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.timeSlotButton strong {
+  font-size: 18px;
+}
+
+.timeSlotButton span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.timeSlotButton:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+  -webkit-text-fill-color: currentColor;
+}
+
+/* BOŞ - YEŞİL */
+
+.timeSlot-available {
+  color: #ffffff;
+  cursor: pointer;
+  background: #126d38;
+  border: 2px solid #36a55f;
+}
+
+.timeSlot-available strong,
+.timeSlot-available span {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+}
+
+.timeSlot-available:hover {
+  transform: translateY(-2px);
+  background: #168447;
+  border-color: #55c77a;
+}
+
+.timeSlot-available:active {
+  transform: scale(0.97);
+}
+
+/* SEÇİLİ - ALTIN SARISI */
+
+.timeSlotButton.timeSlotSelected {
+  color: #111111;
+  background: #d4af37;
+  border: 2px solid #f2d273;
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 55, 0.18),
+    0 10px 24px rgba(212, 175, 55, 0.2);
+}
+
+.timeSlotButton.timeSlotSelected strong,
+.timeSlotButton.timeSlotSelected span {
+  color: #111111;
+  -webkit-text-fill-color: #111111;
+}
+
+.timeSlotButton.timeSlotSelected:hover {
+  background: #d4af37;
+  border-color: #f2d273;
+}
+
+/* DOLU - KIRMIZI */
+
+.timeSlot-booked,
+.timeSlot-booked:disabled {
+  color: #ffffff;
+  background: #a92323;
+  border: 2px solid #e24747;
+}
+
+.timeSlot-booked strong,
+.timeSlot-booked span {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+}
+
+/* KAPALI - SİYAH */
+
+.timeSlot-blocked,
+.timeSlot-blocked:disabled {
+  color: #d0d0d0;
+  background: #000000;
+  border: 2px solid #555555;
+}
+
+.timeSlot-blocked strong {
+  color: #e0e0e0;
+  -webkit-text-fill-color: #e0e0e0;
+}
+
+.timeSlot-blocked span {
+  color: #a0a0a0;
+  -webkit-text-fill-color: #a0a0a0;
+}
+
+/* GEÇMİŞ - GRİ */
+
+.timeSlot-past,
+.timeSlot-past:disabled {
+  color: #b0b0b0;
+  background: #393939;
+  border: 2px solid #5c5c5c;
+}
+
+.timeSlot-past strong {
+  color: #bcbcbc;
+  -webkit-text-fill-color: #bcbcbc;
+  text-decoration: line-through;
+}
+
+.timeSlot-past span {
+  color: #a0a0a0;
+  -webkit-text-fill-color: #a0a0a0;
+}
+
+.timeSlotsMessage {
+  width: 100%;
+  padding: 35px;
+  color: #aaaaaa;
+  background: #101010;
+  border: 1px dashed #444444;
+  border-radius: 13px;
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .timeSlotsGrid {
+    grid-template-columns: repeat(
+      4,
+      minmax(100px, 1fr)
+    );
+  }
+}
+
+@media (max-width: 768px) {
+  .timeSlotsSection {
+    padding: 22px 15px;
+  }
+
+  .timeSlotsHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .timeSlotsHeader p {
+    text-align: left;
+  }
+
+  .timeStatusLegend {
+    gap: 12px 18px;
+  }
+
+  .timeSlotsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .timeSlotButton {
+    min-height: 82px;
+    touch-action: manipulation;
+  }
+
+  .timeSlot-available {
+    background: #126d38;
+    border-color: #36a55f;
+  }
+
+  .timeSlotButton.timeSlotSelected {
+    background: #d4af37;
+    border-color: #f2d273;
+  }
+
+  .timeSlot-booked,
+  .timeSlot-booked:disabled {
+    background: #a92323;
+    border-color: #e24747;
+  }
+
+  .timeSlot-blocked,
+  .timeSlot-blocked:disabled {
+    background: #000000;
+    border-color: #555555;
+  }
+
+  .timeSlot-past,
+  .timeSlot-past:disabled {
+    background: #393939;
+    border-color: #5c5c5c;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeSlotsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timeSlotButton {
+    min-height: 80px;
+  }
+
+  .timeSlotButton strong {
+    font-size: 17px;
+  }
+}
