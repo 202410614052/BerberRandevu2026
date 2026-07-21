@@ -5,9 +5,6 @@ import Footer from "../components/layout/Footer";
 import { supabase } from "../services/supabase";
 import "../styles/admin.css";
 
-const ADMIN_EMAIL = "yasargokceevhairdesigner@gmail.com";
-const ADMIN_PASSWORD = "YGHair!1010TR";
-
 const EMPLOYEES = ["Yaşar Gökçeev", "Çırak"];
 const TIMES = Array.from({ length: 25 }, (_, index) => {
   const minutes = 9 * 60 + index * 30;
@@ -49,8 +46,8 @@ function Admin() {
   const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [loginData, setLoginData] = useState({
-    email: ADMIN_EMAIL,
-    password: ADMIN_PASSWORD,
+    email: "",
+    password: "",
   });
   const [loginError, setLoginError] = useState("");
   const [selectedEmployee, setSelectedEmployee] = useState(EMPLOYEES[0]);
@@ -300,7 +297,7 @@ function Admin() {
       setAppointments([]);
       setBlockedTimes([]);
       setDashboardAppointments([]);
-      setLoginData({ email: ADMIN_EMAIL, password: ADMIN_PASSWORD });
+      setLoginData({ email: "", password: "" });
       setLoginError("");
     } catch (error) {
       console.error("Çıkış yapılamadı:", error);
@@ -449,7 +446,7 @@ function Admin() {
               Supabase hesabınızın e-posta adresi ve şifresiyle giriş yapın.
             </span>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin} autoComplete="off">
               <div className="adminFormGroup">
                 <label htmlFor="email">E-posta Adresi</label>
                 <input
@@ -461,8 +458,8 @@ function Admin() {
                     setLoginData({ ...loginData, email: event.target.value });
                     setLoginError("");
                   }}
-                  autoComplete="email"
-                  placeholder="yasargokceevhairdesigner@gmail.com"
+                  autoComplete="off"
+                  placeholder="E-posta adresinizi girin"
                   required
                 />
               </div>
@@ -478,7 +475,7 @@ function Admin() {
                     setLoginData({ ...loginData, password: event.target.value });
                     setLoginError("");
                   }}
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   placeholder="Şifrenizi girin"
                   required
                 />
