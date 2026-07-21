@@ -36,8 +36,10 @@ function TimeSlots({
   selectedTime,
   onTimeSelect,
   selectedDate,
-  selectedEmployee = "Yaşar Gökçeev",
+  employee,
 }) {
+  const selectedEmployee = employee;
+
   const [appointments, setAppointments] = useState([]);
   const [blockedTimes, setBlockedTimes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -133,6 +135,7 @@ function TimeSlots({
           "Randevular yüklenemedi:",
           appointmentResponse.error
         );
+
         setAppointments([]);
       } else {
         setAppointments(appointmentResponse.data || []);
@@ -143,6 +146,7 @@ function TimeSlots({
           "Kapalı saatler yüklenemedi:",
           blockedResponse.error
         );
+
         setBlockedTimes([]);
       } else {
         setBlockedTimes(blockedResponse.data || []);
@@ -161,18 +165,27 @@ function TimeSlots({
   }, [selectedDate, selectedEmployee]);
 
   useEffect(() => {
+    setAppointments([]);
+    setBlockedTimes([]);
+
+    if (typeof onTimeSelect === "function") {
+      onTimeSelect("");
+    }
+
     fetchTimeInformation();
-  }, [fetchTimeInformation]);
+  }, [fetchTimeInformation, onTimeSelect]);
 
   useEffect(() => {
     if (!selectedDate || !selectedEmployee) {
-      return;
+      return undefined;
     }
 
+    const channelName = `customer-times-${selectedEmployee}-${selectedDate}`
+      .replace(/\s+/g, "-")
+      .toLocaleLowerCase("tr-TR");
+
     const channel = supabase
-      .channel(
-        `customer-times-${selectedEmployee}-${selectedDate}`
-      )
+      .channel(channelName)
       .on(
         "postgres_changes",
         {
@@ -180,7 +193,9 @@ function TimeSlots({
           schema: "public",
           table: "appointments",
         },
-        fetchTimeInformation
+        () => {
+          fetchTimeInformation();
+        }
       )
       .on(
         "postgres_changes",
@@ -189,7 +204,9 @@ function TimeSlots({
           schema: "public",
           table: "blocked_times",
         },
-        fetchTimeInformation
+        () => {
+          fetchTimeInformation();
+        }
       )
       .subscribe();
 
@@ -253,7 +270,7 @@ function TimeSlots({
       selectedStatus !== "available" &&
       typeof onTimeSelect === "function"
     ) {
-      onTimeSelect(null);
+      onTimeSelect("");
     }
   }, [
     currentTime,
@@ -273,7 +290,11 @@ function TimeSlots({
     }
 
     if (typeof onTimeSelect === "function") {
-      onTimeSelect(time);
+      if (selectedTime === time) {
+        onTimeSelect("");
+      } else {
+        onTimeSelect(time);
+      }
     }
   };
 
@@ -297,7 +318,11 @@ function TimeSlots({
     return "Saat Geçti";
   };
 
-  const getTitleText = (status) => {
+  const getTitleText = (status, isSelected) => {
+    if (isSelected) {
+      return "Bu saat seçildi";
+    }
+
     if (status === "available") {
       return "Bu saati seçebilirsiniz";
     }
@@ -317,6 +342,14 @@ function TimeSlots({
     return (
       <div className="timeSlotsMessage">
         Saatleri görmek için önce tarih seçin.
+      </div>
+    );
+  }
+
+  if (!selectedEmployee) {
+    return (
+      <div className="timeSlotsMessage">
+        Saatleri görmek için önce çalışan seçin.
       </div>
     );
   }
@@ -369,6 +402,7 @@ function TimeSlots({
         <div className="timeSlotsGrid">
           {TIMES.map((time) => {
             const status = getTimeStatus(time);
+
             const isSelected =
               status === "available" &&
               selectedTime === time;
@@ -391,7 +425,7 @@ function TimeSlots({
                   status,
                   isSelected
                 )}`}
-                title={getTitleText(status)}
+                title={getTitleText(status, isSelected)}
               >
                 <strong>{time}</strong>
 
