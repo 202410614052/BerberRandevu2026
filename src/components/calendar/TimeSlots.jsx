@@ -248,12 +248,12 @@ function TimeSlots({
       return "past";
     }
 
-    if (getAppointmentByTime(time)) {
-      return "booked";
-    }
-
     if (getBlockedTimeByTime(time)) {
       return "blocked";
+    }
+
+    if (getAppointmentByTime(time)) {
+      return "booked";
     }
 
     return "available";
