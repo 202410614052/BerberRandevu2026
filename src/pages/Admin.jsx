@@ -6,7 +6,7 @@ import { supabase } from "../services/supabase";
 import { requestNotificationToken } from "../services/firebase";
 import "../styles/admin.css";
 
-const EMPLOYEES = ["Yaşar Gökçeev", "Çırak"];
+const EMPLOYEES = ["Yaşar Gökçeev", "Buğra Akşit"];
 const TIMES = Array.from({ length: 25 }, (_, index) => {
   const minutes = 9 * 60 + index * 30;
   return `${String(Math.floor(minutes / 60)).padStart(2, "0")}:${String(minutes % 60).padStart(2, "0")}`;

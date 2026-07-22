@@ -404,8 +404,8 @@ function Appointment() {
                     Yaşar Gökçeev
                   </option>
 
-                  <option value="Çırak">
-                    Çırak
+                  <option value="Buğra Akşit">
+                    Buğra Akşit
                   </option>
                 </select>
               </div>
