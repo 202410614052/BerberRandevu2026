@@ -7,6 +7,7 @@ import Calendar from "../components/calendar/Calendar";
 import TimeSlots from "../components/calendar/TimeSlots";
 
 import { supabase } from "../services/supabase";
+import { requestNotificationToken } from "../services/firebase";
 
 import "../styles/appointment.css";
 
@@ -55,6 +56,44 @@ function Appointment() {
   const handleDateSelect = (date) => {
     setSelectedDate(date);
     setSelectedTime("");
+  };
+
+  const getCustomerNotificationToken = async () => {
+    try {
+      return await requestNotificationToken();
+    } catch (error) {
+      console.warn(
+        "Müşteri bildirim izni vermedi veya token alınamadı:",
+        error
+      );
+
+      return null;
+    }
+  };
+
+  const triggerCustomerReminderCheck = async (appointmentId) => {
+    try {
+      const { error } = await supabase.functions.invoke(
+        "send-customer-reminder",
+        {
+          body: {
+            appointment_id: appointmentId,
+          },
+        }
+      );
+
+      if (error) {
+        console.warn(
+          "Yakın randevu bildirim kontrolü çalıştırılamadı:",
+          error
+        );
+      }
+    } catch (error) {
+      console.warn(
+        "Yakın randevu bildirim kontrolünde hata oluştu:",
+        error
+      );
+    }
   };
 
   const createAppointment = async () => {
@@ -132,7 +171,13 @@ function Appointment() {
         return;
       }
 
-      const { error: insertError } = await supabase
+      const customerPushToken =
+        await getCustomerNotificationToken();
+
+      const {
+        data: createdAppointment,
+        error: insertError,
+      } = await supabase
         .from("appointments")
         .insert([
           {
@@ -144,8 +189,13 @@ function Appointment() {
             appointment_date: selectedDate,
             appointment_time: selectedTime,
             status: "active",
+            customer_push_token: customerPushToken,
+            reminder_sent: false,
+            reminder_sent_at: null,
           },
-        ]);
+        ])
+        .select("id")
+        .single();
 
       if (insertError) {
         console.error("Randevu kayıt hatası:", insertError);
@@ -172,12 +222,27 @@ function Appointment() {
         return;
       }
 
+      if (
+        customerPushToken &&
+        createdAppointment?.id
+      ) {
+        await triggerCustomerReminderCheck(
+          createdAppointment.id
+        );
+      }
+
+      const notificationMessage =
+        customerPushToken
+          ? "\n\nBildirimler açıldı. Randevunuz yaklaşınca hatırlatma bildirimi alacaksınız."
+          : "\n\nBildirim izni verilmediği için hatırlatma bildirimi gönderilemeyecek.";
+
       alert(
         `Randevunuz başarıyla oluşturuldu.\n\n` +
           `Müşteri: ${formData.firstName} ${formData.lastName}\n` +
           `Çalışan: ${formData.employee}\n` +
           `Tarih: ${selectedDate}\n` +
-          `Saat: ${selectedTime}`
+          `Saat: ${selectedTime}` +
+          notificationMessage
       );
 
       setFormData({
